@@ -36,7 +36,6 @@
   --radius: 0.5rem;
   /* Warm Italian palette: cream, deep red, olive, charcoal */
   --background: oklch(0.98 0.012 75);
-  --foreground: oklch(0.२० 0.02 40);
   --foreground: oklch(0.20 0.02 40);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.20 0.02 40);
