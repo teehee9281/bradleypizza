@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroPizza from "@/assets/hero-pizza.jpg";
-import { Phone, MapPin, Clock, Mail, ExternalLink, Pizza } from "lucide-react";
+import { Phone, MapPin, Clock, Mail, Pizza } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -152,9 +152,6 @@ function Index() {
               <a href="tel:+17186821703" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-semibold shadow-[var(--shadow-warm)] hover:translate-y-[-1px] transition">
                 <Phone className="h-4 w-4" /> Call to Order
               </a>
-              <a href="https://bradley-pizza.square.site" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 font-semibold hover:bg-secondary transition">
-                Order Online <ExternalLink className="h-4 w-4" />
-              </a>
             </div>
             <p className="mt-4 text-sm text-muted-foreground">
               Today ({today}): <span className="font-medium text-foreground">{HOURS.find(h => h[0] === today)?.[1]}</span>
@@ -266,8 +263,8 @@ function Index() {
               </li>
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="https://bradley-pizza.square.site" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold">
-                Order Online <ExternalLink className="h-4 w-4" />
+              <a href="tel:+17186821703" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold">
+                <Phone className="h-4 w-4" /> Call to Order
               </a>
               <a href="https://maps.google.com/?q=311+Bradley+Ave+Staten+Island+NY+10314" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold hover:bg-white/10">
                 <MapPin className="h-4 w-4" /> Get Directions
