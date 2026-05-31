@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import heroPizza from "@/assets/hero-pizza.jpg";
-import { Phone, MapPin, Clock, Mail, Pizza } from "lucide-react";
+import heroPizza from "@/assets/pizza-making.jpg";
+import logo from "@/assets/bradley-pizza-logo.png";
+import { Phone, MapPin, Clock, Mail, Pizza, Navigation } from "lucide-react";
+
+const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=311+Bradley+Ave+Staten+Island+NY+10314";
+const MAP_EMBED_URL = "https://www.google.com/maps?q=311+Bradley+Ave+Staten+Island+NY+10314&output=embed";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -117,8 +121,9 @@ function Index() {
       {/* Nav */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-background/85 border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <a href="#top" className="flex items-center gap-2 font-display text-xl font-bold text-primary">
-            <Pizza className="h-6 w-6" aria-hidden /> Bradley Pizza
+          <a href="#top" className="flex items-center gap-3 font-display text-xl font-bold text-primary">
+            <img src={logo} alt="Bradley Pizza logo" width={40} height={40} className="h-10 w-10 rounded-md object-contain bg-[#0d0d0d] p-1" />
+            <span className="hidden sm:inline">Bradley Pizza</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
             <a href="#menu" className="hover:text-primary transition-colors">Menu</a>
