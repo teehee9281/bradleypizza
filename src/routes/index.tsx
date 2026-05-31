@@ -302,6 +302,43 @@ function Index() {
         </div>
       </section>
 
+      {/* Map */}
+      <section id="map" className="bg-background">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-accent-foreground/80 text-sm font-semibold tracking-widest uppercase">Find Us</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-2">311 Bradley Ave, Staten Island</h2>
+            <p className="mt-4 text-muted-foreground">Right on Bradley Avenue — easy parking, easier slices.</p>
+          </div>
+          <div className="rounded-3xl overflow-hidden border border-border shadow-[var(--shadow-card)] bg-card">
+            <iframe
+              title="Bradley Pizza location map"
+              src={MAP_EMBED_URL}
+              width="100%"
+              height="420"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-[320px] sm:h-[420px] border-0 block"
+            />
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:p-6 border-t border-border">
+              <div className="flex items-center gap-3 text-sm">
+                <MapPin className="h-5 w-5 text-primary shrink-0" />
+                <span className="font-medium">311 Bradley Ave, Staten Island, NY 10314</span>
+              </div>
+              <a
+                href={DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold shadow-[var(--shadow-warm)] hover:translate-y-[-1px] transition w-full sm:w-auto justify-center"
+              >
+                <Navigation className="h-4 w-4" /> Get Directions
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* Footer */}
       <footer className="bg-background border-t border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
