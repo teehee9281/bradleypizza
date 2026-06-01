@@ -1,1 +1,13 @@
-{}
+{
+  "functions": {
+    "dist/server/index.mjs": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/server/index.mjs"
+    }
+  ]
+}
