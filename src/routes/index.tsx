@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import heroPizza from "@/assets/pizza-making.jpg";
 import logo from "@/assets/bradley-pizza-logo.png";
 import { Phone, MapPin, Clock, Mail, Pizza, Navigation } from "lucide-react";
+import { Reviews } from "@/components/Reviews";
+import { Chatbot } from "@/components/Chatbot";
+import { ImageModal } from "@/components/ImageModal";
 
 const DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=311+Bradley+Ave+Staten+Island+NY+10314";
 const MAP_EMBED_URL = "https://www.google.com/maps?q=311+Bradley+Ave+Staten+Island+NY+10314&output=embed";
@@ -113,8 +117,138 @@ const SPECIALS = [
   { title: "Large Pie Special", price: "$12.99", desc: "Classic NY large cheese pie." },
 ];
 
+const REVIEWS = [
+  {
+    name: "Asmaa Elamrousy",
+    rating: 5,
+    text: "First time trying this pizzeria & WOW! The personal margherita pie is my fav. The slices are seasoned to perfection. You get a hint of sweetness in the sauce with a perfectly balanced salt ratio, generous serving of homemade cheese & a nice …",
+    time: "8 months ago",
+  },
+  {
+    name: "Dawid Karp",
+    rating: 5,
+    text: "Amazing pizza and they serve many other delicious foods. 100% recommend if your in the area!!!!",
+    time: "3 months ago",
+  },
+  {
+    name: "Jonathan Firmino",
+    rating: 5,
+    text: "The best pizza I've had in a very very long time. I would definitely recommend this place to everyone.",
+    time: "6 months ago",
+  },
+  {
+    name: "A I",
+    rating: 5,
+    text: "A very quiet and humble little spot on the corner of Bradley and Holden. I stop by to pick up a slice or two and they're absolutely delicious. Crust is nice and crunchy and does a great job holding the generous layer of cheese/toppings",
+    time: "11 months ago",
+  },
+  {
+    name: "Scott Larsh",
+    rating: 5,
+    text: "I stopped in at 9:55 PM on Tuesday night. We ordered some wings and a pie. They were both PERFECT. So good. I didn't realize what time it was when I ordered, and they had no problem serving me. Thank you for excellent Pizza.",
+    time: "a year ago",
+  },
+  {
+    name: "Thomas Baroz",
+    rating: 5,
+    text: "Always great food, fantastic family owned. Need to have food sent over to a friends house quickly due to loss in the family. They quickly and compassionately prepared it, sent over. Thank you for your help and as always great food.",
+    time: "2 years ago",
+  },
+  {
+    name: "Gary Wilson",
+    rating: 5,
+    text: "This is an excellent slice of pizza! When the 1 review gave 5 stars my first reaction was... Yeah, right. Who rated",
+    time: "4 years ago",
+  },
+  {
+    name: "Radi Odeh",
+    rating: 5,
+    text: "Very good pizza, great chicken wings, not greasy. Great flavor. Highly recommend! Best pizzeria in the neighborhood you can tell it's made with love. Even better when it's family owned business. Thank you!",
+    time: "2 years ago",
+  },
+  {
+    name: "Lisa Lee",
+    rating: 5,
+    text: "It's really good, the customer service is truly excellent. Great dishes, also pretty good deals. If I have to say something of a con; it would be that you'd need to eat the food within 20 mins. So essentially it's good to eat the food within purchase",
+    time: "3 years ago",
+  },
+  {
+    name: "Ashley Gibbs",
+    rating: 5,
+    text: "I have had everything from pizza to wraps, salads, heros and appetizers and have NEVER had anything bad... The food is excellent and I highly recommend this place. Their prices are reasonable and you get a lot for your money! Love love love this place. Good job guys!",
+    time: "6 years ago",
+  },
+  {
+    name: "Angie Benavides",
+    rating: 5,
+    text: "They serve the BEST pizza🍕 You can tell they actually serve the best products and ingredients that no restaurant could. They also serve the best tamales every Sunday. Very unique 😋🫔",
+    time: "2 years ago",
+  },
+  {
+    name: "Byyraann Tores",
+    rating: 5,
+    text: "I got to say for a pizza joint that tries they definitely have it together. The pizza quality is good, decently priced and fresh. The weekly specials they have going on are right on point. Try them out folks!",
+    time: "2 years ago",
+  },
+  {
+    name: "jonathan hernandez",
+    rating: 5,
+    text: "Sauce is fantastic also love the pizza and the chicken parm sandwich with garlic drizzled on the bread is to die for. definitely worth giving this place a try it's my new go to in the area",
+    time: "2 years ago",
+  },
+  {
+    name: "Saj",
+    rating: 5,
+    text: "Eggplant parmigiana is excellent. Love the daily specials. They are always friendly and offer great food for a great value. Try them for catering too.",
+    time: "3 years ago",
+  },
+  {
+    name: "nohelia murillo",
+    rating: 5,
+    text: "The pizza is always fresh and delicious. The staff here has my heart! I love coming here with friends and family!",
+    time: "2 years ago",
+  },
+  {
+    name: "Rhett Hodgson",
+    rating: 5,
+    text: "Excellent quality pizza. Anchovies addition at $4.50 is, however, highway robbery. Get the Margarita pie",
+    time: "2 years ago",
+  },
+  {
+    name: "Zaire Covington",
+    rating: 5,
+    text: "Good fresh tasty pizza with a lovely staff and atmosphere enjoy staying here to eat and chat with friends.Overall great experience",
+    time: "2 years ago",
+  },
+  {
+    name: "Fernando Morales",
+    rating: 5,
+    text: "The pizza was delicious good price and fast service completely recommend",
+    time: "2 years ago",
+  },
+  {
+    name: "ENNIO RODAS",
+    rating: 5,
+    text: "Food is amazing and always fresh. Have great specials and provide great portions for the price. Staff are very friendly and professional.",
+    time: "3 years ago",
+  },
+  {
+    name: "d3Ath",
+    rating: 5,
+    text: "The pizza here is delicious, the staff are friendly and it's a great place to go to for lunch or dinner.",
+    time: "2 years ago",
+  },
+  {
+    name: "N VB",
+    rating: 5,
+    text: "Love their pizza and specialty dishes! Great salads and apps! The owners are AWESOME people, their love of food and service shows!",
+    time: "6 years ago",
+  },
+];
+
 function Index() {
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -126,14 +260,15 @@ function Index() {
             <span className="hidden sm:inline">Bradley Pizza</span>
           </a>
           <nav className="hidden md:flex items-center gap-7 text-sm font-medium">
-            <a href="#menu" className="hover:text-primary transition-colors">Menu</a>
-            <a href="#specials" className="hover:text-primary transition-colors">Specials</a>
-            <a href="#hours" className="hover:text-primary transition-colors">Hours</a>
-            <a href="#visit" className="hover:text-primary transition-colors">Visit</a>
+            <a href="#menu" className="hover:text-primary transition-all duration-200 hover:scale-105 hover:underline hover:underline-offset-4 hover:decoration-2">Menu</a>
+            <a href="#specials" className="hover:text-primary transition-all duration-200 hover:scale-105 hover:underline hover:underline-offset-4 hover:decoration-2">Specials</a>
+            <a href="#reviews" className="hover:text-primary transition-all duration-200 hover:scale-105 hover:underline hover:underline-offset-4 hover:decoration-2">Reviews</a>
+            <a href="#hours" className="hover:text-primary transition-all duration-200 hover:scale-105 hover:underline hover:underline-offset-4 hover:decoration-2">Hours</a>
+            <a href="#visit" className="hover:text-primary transition-all duration-200 hover:scale-105 hover:underline hover:underline-offset-4 hover:decoration-2">Visit</a>
           </nav>
           <a
             href="tel:+17186821703"
-            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold hover:opacity-90 transition"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-4 py-2 text-sm font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-[var(--shadow-warm)]"
           >
             <Phone className="h-4 w-4" /> <span className="hidden sm:inline">(718) 682-1703</span><span className="sm:hidden">Call</span>
           </a>
@@ -169,7 +304,8 @@ function Index() {
               alt="Fresh NY-style pizza from Bradley Pizza"
               width={1536}
               height={1536}
-              className="relative rounded-3xl shadow-[var(--shadow-warm)] w-full aspect-square object-cover"
+              className="relative rounded-3xl shadow-[var(--shadow-warm)] w-full aspect-square object-cover cursor-pointer transition-transform duration-300 hover:scale-[1.125]"
+              onClick={() => setIsImageModalOpen(true)}
             />
           </div>
         </div>
@@ -187,7 +323,7 @@ function Index() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {SPECIALS.map((s) => (
-              <article key={s.title} className="bg-card rounded-2xl p-6 shadow-[var(--shadow-card)] border border-border hover:border-primary/40 transition">
+              <article key={s.title} className="bg-card rounded-2xl p-6 shadow-[var(--shadow-card)] border border-border hover:border-accent hover:scale-105 transition-all duration-300 cursor-pointer">
                 <div className="flex items-start justify-between gap-4">
                   <h3 className="font-display text-xl font-bold">{s.title}</h3>
                   <span className="text-primary font-bold text-lg whitespace-nowrap">{s.price}</span>
@@ -209,7 +345,7 @@ function Index() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {Object.entries(MENU).map(([cat, items]) => (
-            <div key={cat} className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-[var(--shadow-card)]">
+            <div key={cat} className="bg-card border border-border rounded-2xl p-6 sm:p-8 shadow-[var(--shadow-card)] hover:border-accent hover:scale-105 transition-all duration-300 cursor-pointer">
               <h3 className="font-display text-2xl font-bold text-primary mb-5 pb-3 border-b border-border">{cat}</h3>
               <ul className="space-y-3">
                 {items.map(([name, price]) => (
@@ -227,6 +363,18 @@ function Index() {
         <p className="text-center text-sm text-muted-foreground mt-10">
           Menu items and prices subject to change. Call us for the full daily menu.
         </p>
+      </section>
+
+      {/* Reviews */}
+      <section id="reviews" className="bg-secondary/50 border-y border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <p className="text-accent-foreground/80 text-sm font-semibold tracking-widest uppercase">Reviews</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mt-2">What our customers say</h2>
+            <p className="mt-4 text-muted-foreground">5-star reviews from our amazing customers on Google.</p>
+          </div>
+          <Reviews reviews={REVIEWS} />
+        </div>
       </section>
 
       {/* Hours + Visit */}
@@ -348,6 +496,14 @@ function Index() {
           <p>© {new Date().getFullYear()} Bradley Pizza • Staten Island, NY</p>
         </div>
       </footer>
+
+      <Chatbot />
+      <ImageModal
+        isOpen={isImageModalOpen}
+        onClose={() => setIsImageModalOpen(false)}
+        src={heroPizza}
+        alt="Fresh NY-style pizza from Bradley Pizza"
+      />
     </div>
   );
 }
